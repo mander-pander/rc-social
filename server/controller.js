@@ -25,4 +25,14 @@ module.exports = {
         });
     },
 
+    displayAP: (req, res) => {
+        sequelize.query(`
+            SELECT *
+            FROM airplane;
+        `)
+        .then((dbRes) => {
+            res.send(dbRes)
+        });
+    }
+
 }

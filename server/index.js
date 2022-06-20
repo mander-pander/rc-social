@@ -11,10 +11,10 @@ app.use(express.json());
 
 const {
     displayFeed,
-    // displayAP
+    displayAP
 } = require('./controller.js');
 
 app.get('/posts', displayFeed);
-// app.get('/planes', displayAP);
+app.get('/planes', displayAP);
 
 app.listen(SERVER_PORT, () => console.log(`Server running on ${SERVER_PORT}`));
