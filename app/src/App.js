@@ -8,6 +8,7 @@ function App() {
       <ul>
         <li><a href="http://localhost:3000/posts">Home Page</a></li>
         <li><a href="http://localhost:3000/planes">Airplane Directory</a></li>
+        <li><a href="http://localhost:3000/createPost">Create A New Post</a></li>
       </ul>
       <Header />
     </div>

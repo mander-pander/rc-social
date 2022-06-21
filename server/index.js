@@ -11,10 +11,14 @@ app.use(express.json());
 
 const {
     displayFeed,
-    displayAP
+    displayAP,
+    createPost,
+    deletePost
 } = require('./controller.js');
 
 app.get('/posts', displayFeed);
 app.get('/planes', displayAP);
+app.post('/createPost', createPost);
+app.delete('/posts', deletePost);
 
 app.listen(SERVER_PORT, () => console.log(`Server running on ${SERVER_PORT}`));

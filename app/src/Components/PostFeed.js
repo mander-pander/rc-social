@@ -11,14 +11,36 @@ export default function PostFeed() {
                 setList(res.data[0]);
             })
             .catch(err => console.log(err))
-    });
+    }, []);
 
-    console.log(list);
+    const deletePost = async (post_id) => {
+        let params = {
+            data: {
+                post_id
+            }
+        }
+
+        try {
+            await axios.delete('http://localhost:5050/posts', {params})
+            console.log('post deleted')
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return (
         <div>
             {list.map((post) => {
                 return (
-                    <p>{post.content}</p>
+                    <div>
+                        <p>{post.pc}</p>
+                        <p>{post.cc}</p>
+                        <button onClick={() => {
+                            deletePost(post.pi)
+                        }}>
+                            Delete
+                        </button>
+                    </div>
                 )
             })}
         </div>
