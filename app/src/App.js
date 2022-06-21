@@ -1,20 +1,16 @@
-import { Route, Routes, BrowserRouter } from "react-router-dom";
 import './App.css';
-import PostFeed from './Components/PostFeed';
-import DisplayAP from "./Components/DisplayAP";
+import Header from "./Components/Header";
 
 function App() {
+
   return (
     <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/posts" element={<PostFeed />} />
-          <Route path="/planes" element={<DisplayAP />} />
-
-        </Routes>
-      </BrowserRouter>
+      <ul>
+        <li><a href="http://localhost:3000/posts">Home Page</a></li>
+        <li><a href="http://localhost:3000/planes">Airplane Directory</a></li>
+      </ul>
+      <Header />
     </div>
-
   );
 }
 
