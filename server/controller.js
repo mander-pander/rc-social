@@ -128,5 +128,18 @@ module.exports = {
                 res.send(dbRes);
             })
             .catch((err) => console.log(err));
+    },
+
+    addToWL: (req, res) => {
+        const { wishlist_id, airplane_id } = req.body;
+        sequelize.query(`
+            INSERT INTO wishlistitem
+            (wishlist_id, airplane_id)
+            VALUES ('${wishlist_id}', '${airplane_id}')
+            `)
+            .then((dbRes) => {
+                res.send(dbRes);
+            })
+            .catch((err) => console.log(err));
     }
 };
