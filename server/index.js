@@ -1,20 +1,10 @@
+/* eslint-disable no-console */
 const express = require("express");
 const cors = require("cors");
 
 require("dotenv").config();
 
-const { SERVER_PORT, CONNECTION_STRING } = process.env;
-
-const Sequelize = require("sequelize");
-
-const sequelize = new Sequelize(CONNECTION_STRING, {
-    dialect: "postgres",
-    dialectOptions: {
-        ssl: {
-            rejectUnauthorized: false
-        }
-    }
-});
+const { SERVER_PORT } = process.env;
 
 const app = express();
 
@@ -67,9 +57,11 @@ app.delete("/comments", deleteComments);
 const {
     createUser,
     loginUser
+    // logoutUser
 } = require("./controllerAuth");
 
 app.post("/signup", createUser);
 app.post("/login", loginUser);
+// app.post("/logout", logoutUser);
 
 app.listen(SERVER_PORT, () => console.log(`Server running on ${SERVER_PORT}`));
