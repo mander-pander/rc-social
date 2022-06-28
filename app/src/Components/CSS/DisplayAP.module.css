@@ -1,0 +1,17 @@
+.page {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+}
+
+.planes {
+    margin: 5px;
+    display: flex;
+    text-align: center;
+    justify-content: space-between;
+}
+
+.item {
+    display: flex;
+    justify-content: space-between;
+}

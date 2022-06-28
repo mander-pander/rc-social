@@ -6,6 +6,7 @@ import styles from '../Components/CSS/PostFeed.module.css';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
+import { TiTrash } from "react-icons/ti";
 
 export default function PostFeed() {
     const [list, setList] = useState([]);
@@ -70,8 +71,8 @@ export default function PostFeed() {
                         <Card>
                             <Card.Body>
                                 <div className={styles.posts}>
-                                    <p>{post.pc}</p>
-                                    <Button variant="outline-dark" onClick={() => {
+                                    <p className={styles.content}>{post.pc}</p>
+                                    <Button variant="outline-danger" size="sm" onClick={() => {
                                         deletePost(post.pi)
                                     }}> Delete Post
                                     </Button>
@@ -84,9 +85,9 @@ export default function PostFeed() {
                                             <ListGroup >
                                                 <ListGroup.Item >
                                                     <div className={styles.comments}> {comment}
-                                                        <Button variant="outline-dark" onClick={() => {
+                                                        <Button variant="outline-warning" size="sm" onClick={() => {
                                                             deleteComment(post.ci)
-                                                        }}>X
+                                                        }}><TiTrash />
                                                         </Button></div>
 
                                                 </ListGroup.Item>
