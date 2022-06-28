@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable camelcase */
 
 require("dotenv").config();
@@ -17,14 +18,12 @@ const sequelize = new Sequelize(CONNECTION_STRING, {
 
 module.exports = {
     displayFeed: (req, res) => {
-        console.log(req.user_id);
         sequelize.query(`
             SELECT posts.content AS pc, comments.content AS cc, posts.id AS pi, comments.id AS ci
             FROM posts
             LEFT JOIN comments
             ON posts.id = comments.post_id
-            ORDER BY posts.id;
-        `)
+            `)
             .then((dbRes) => {
                 const newdbRes = {};
                 for (const dbResObj of dbRes[0]) {
@@ -36,7 +35,7 @@ module.exports = {
                         (newdbRes[dbResObj.pi].cc).push(dbResObj.cc);
                     }
                 }
-                res.send(Object.values(newdbRes));
+                res.send(Object.values(newdbRes).sort((a, b) => b.pi - a.pi));
             })
             .catch((err) => console.log("Error", err));
     },
@@ -53,11 +52,11 @@ module.exports = {
     },
 
     createPost: (req, res) => {
-        const { content, user_id } = req.body;
+        const { content } = req.body;
         sequelize.query(`
             INSERT INTO posts
             (content, user_id)
-            VALUES ('${content}', '${user_id}');
+            VALUES ('${content}', '${req.user_id}');
         `)
             .then((dbRes) => {
                 res.send(dbRes);
@@ -66,25 +65,30 @@ module.exports = {
     },
 
     createComment: (req, res) => {
-        const { content, user_id, post_id } = req.body;
+        const { content } = req.body;
         sequelize.query(`
-            INSERT INTO comments
-            (content, user_id, post_id)
-            VALUES ('${content}', '${user_id}', '${post_id}');
+            SELECT id
+            FROM posts
+            WHERE posts.user_id = '${req.user_id}'
         `)
             .then((dbRes) => {
+                sequelize.query(`
+                INSERT INTO comments
+                (content, user_id, post_id)
+                VALUES ('${content}', '${req.user_id}', '${dbRes[0][0].id}');
+                `);
                 res.send(dbRes);
             })
             .catch((err) => console.log(err));
     },
 
     deletePost: (req, res) => {
-        console.log("req.query", req.query);
+        // console.log("req.query", req.query);
         const { post_id } = JSON.parse(req.query.data);
         sequelize.query(`
             DELETE
             FROM posts
-            WHERE id = "${post_id}";
+            WHERE id='${post_id}';
         `)
             .then((dbRes) => {
                 res.send(dbRes);
@@ -131,14 +135,21 @@ module.exports = {
     },
 
     addToWL: (req, res) => {
-        const { wishlist_id, airplane_id } = req.body;
+        const { airplane_id } = req.body;
+        console.log(req.body);
         sequelize.query(`
-            INSERT INTO wishlistitem
-            (wishlist_id, airplane_id)
-            VALUES ('${wishlist_id}', '${airplane_id}')
+            SELECT id
+            FROM wishlist
+            WHERE wishlist.user_id='${req.user_id}';
             `)
             .then((dbRes) => {
+                sequelize.query(`
+                INSERT INTO wishlistitem
+                (wishlist_id, airplane_id)
+                VALUES ('${dbRes[0][0].id}', '${airplane_id}');
+                `);
                 res.send(dbRes);
+                // console.log('cowman', dbRes[0][0].id);
             })
             .catch((err) => console.log(err));
     }

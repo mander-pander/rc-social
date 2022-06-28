@@ -48,9 +48,9 @@ app.get("/posts", [verifyToken], displayFeed);
 app.get("/planes", displayAP);
 app.get("/fields", displayAirfields);
 app.get("/wishlist", [verifyToken], displayWishlist);
-app.post("/createPost", createPost);
-app.post("/createComment", createComment);
-app.post("/addItem", addToWL);
+app.post("/createPost", [verifyToken], createPost);
+app.post("/createComment", [verifyToken], createComment);
+app.post("/addItem", [verifyToken], addToWL);
 app.delete("/posts", deletePost);
 app.delete("/comments", deleteComments);
 

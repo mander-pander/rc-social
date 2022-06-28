@@ -1,22 +1,20 @@
 import { useState } from 'react';
 import axios from 'axios';
-
-//add state for show form/setshowform
-//button that sets show form to true
-//render method - render form if showform = true
-//otherwise render button that toggles that form
+import Button from 'react-bootstrap/Button'
 
 export default function AddComment() {
     const [comment, setComment] = useState('');
     const [showForm, setShowForm] = useState(false);
 
-    function handleAddComment(e) {
-        e.preventDefault();
+    function handleAddComment(content) {
         axios.post('http://localhost:5050/createComment', {
             content: comment,
-            user_id: 3,
-            post_id: 4
-        })
+        },
+        {
+            withCredentials: true,
+            headers: {
+                'Access-Control-Allow-Origin': 'http://localhost:3000',
+            }})
             .then(() => {
                 console.log('comment added!')
             })
@@ -25,7 +23,7 @@ export default function AddComment() {
 
     return (
         <div>
-            <button onClick={() => setShowForm(true)}>Add Comment</button>
+            <Button variant="outline-dark" onClick={() => setShowForm(true)}>Add Comment</Button>
             <form style={{display: showForm ? "block" : "none"}} onSubmit={handleAddComment}>
                 <input
                     placeholder='Talk to everyone about your flight!'

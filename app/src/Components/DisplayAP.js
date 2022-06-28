@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import styles from './CSS/DisplayAP.module.css';
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
 
 export default function DisplayAP() {
     const [list, setList] = useState([]);
@@ -8,29 +11,35 @@ export default function DisplayAP() {
         axios.get(`http://localhost:5050/planes`)
             .then((res) => {
                 setList(res.data[0]);
+
             })
             .catch(err => console.log(err))
-    });
+    }, []);
 
-    function handleWL(e) {
-        e.preventDefault();
+    const handleWL = async (airplane_id) => {
         axios.post('http://localhost:5050/addItem', {
-            wishlist_id: 50,
-            airplane_id: 8
-        })
-        .then(() => {
-            console.log('item added!')
-        })
-        .catch(err => console.log(err));
+            airplane_id
+        },
+        {
+            withCredentials: true,
+            headers: {
+                'Access-Control-Allow-Origin': 'http://localhost:3000',
+            }})
+        .then(console.log('item added'))
+        .catch((err) => console.log(err));
     }
 
     return (
-        <div>
+        <div className={styles.page}>
             {list.map((plane) => {
                 return (
-                    <div>
-                        <p>{plane.model}</p>
-                        <button onClick={handleWL}>Add to wishlist</button>
+                    <div className={styles.planes}>
+                        <Card className={styles.item} style={{ width: '10rem' }} >
+                            <Card.Img varient="top" src={`https://images.unsplash.com/photo-1575116464504-9e7652fddcb3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80`} />
+                            <Card.Title>{plane.model}</Card.Title>
+
+                            <Button variant="light" size="sm" onClick={() => handleWL(plane.id)}>Add to wishlist</Button>
+                        </Card>
                     </div>
                 )
             })}

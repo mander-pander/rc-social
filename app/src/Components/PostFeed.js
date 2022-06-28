@@ -1,18 +1,28 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import AddComment from './AddComment';
+import AddPost from './AddPost';
+import styles from '../Components/CSS/PostFeed.module.css';
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+import ListGroup from 'react-bootstrap/ListGroup';
 
 export default function PostFeed() {
     const [list, setList] = useState([]);
 
     useEffect(() => {
-        axios.get(`http://localhost:5050/posts`)
+        axios.get(`http://localhost:5050/posts`,
+            {
+                withCredentials: true,
+                headers: {
+                    'Access-Control-Allow-Origin': 'http://localhost:3000',
+                },
+            })
             .then((res) => {
-                debugger;
                 setList(res.data);
             })
             .catch(err => console.log(err))
-    }, [list]);
+    }, []);
 
     const deletePost = async (post_id) => {
         let params = {
@@ -20,10 +30,18 @@ export default function PostFeed() {
                 post_id
             }
         }
-
         try {
-            await axios.delete('http://localhost:5050/posts', { params })
-            console.log('post deleted')
+            try {
+                await axios.delete('http://localhost:5050/posts', { params })
+            } finally {
+                let res = await axios.get(`http://localhost:5050/posts`, {
+                    withCredentials: true,
+                    headers: {
+                        'Access-Control-Allow-Origin': 'http://localhost:3000',
+                    },
+                })
+                setList(res.data);
+            }
         } catch (error) {
             console.log(error)
         }
@@ -37,38 +55,50 @@ export default function PostFeed() {
         }
         try {
             await axios.delete('http://localhost:5050/comments', { params })
-            console.log('comment deleted')
+
         } catch (error) {
             console.log(error)
         }
     };
 
     return (
-        <div>
-            {list.map((post) => {
-                return (
-                    <div>
-                        <p>{post.pc}</p>
-                        <button onClick={() => {
-                            deletePost(post.pi)
-                        }}> Delete Post
-                        </button>
-                        <AddComment />
-                        {post.cc.map((comment) => {
-                            return (
-                                <div>
-                                    <p>{comment}</p>
-                                    <button onClick={() => {
-                                        deleteComment(post.ci)
-                                    }}>Delete Comment
-                                    </button>
+        <div className={styles.page}>
+            <div className={styles.feed}>
+                <AddPost />
+                {list.map((post) => {
+                    return (
+                        <Card>
+                            <Card.Body>
+                                <div className={styles.posts}>
+                                    <p>{post.pc}</p>
+                                    <Button variant="outline-dark" onClick={() => {
+                                        deletePost(post.pi)
+                                    }}> Delete Post
+                                    </Button>
+                                    <AddComment />
                                 </div>
-                            )
-                        })}
 
-                    </div>
-                )
-            })}
+                                {post.cc.map((comment) => {
+                                    if (comment) {
+                                        return (
+                                            <ListGroup >
+                                                <ListGroup.Item >
+                                                    <div className={styles.comments}> {comment}
+                                                        <Button variant="outline-dark" onClick={() => {
+                                                            deleteComment(post.ci)
+                                                        }}>X
+                                                        </Button></div>
+
+                                                </ListGroup.Item>
+                                            </ListGroup>
+                                        )
+                                    }
+                                })}
+                            </Card.Body>
+                        </Card>
+                    )
+                })}
+            </div>
         </div>
     )
 }
