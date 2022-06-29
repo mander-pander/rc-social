@@ -1,20 +1,40 @@
 import Header from "./Components/Header";
 import styles from './App.module.css';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import Logout from "./Components/Logout";
 
 function App() {
 
   return (
-    <div>
-      <ul className={styles.nav}>
-       <li><a href="http://localhost:3000/posts">Home Page</a></li>
-        <li><a href="http://localhost:3000/wishlist">Wishlist</a></li>
-        <li><a href="http://localhost:3000/planes">Airplane Directory</a></li>
-        <li><a href="http://localhost:3000/fields">AirField Directory</a></li>
-        <li><a href="http://localhost:3000/createAccount">Sign Up Here</a></li>
-        <li><a href="http://localhost:3000/login">Sign Into Your Account</a></li>
-      </ul>
+    <>
+      <Navbar>
+        <Nav as="ul" className={styles.nav}>
+          <Nav.Item as="li">
+            <Nav.Link href="http://localhost:3000/posts">Home Page</Nav.Link>
+          </Nav.Item>
+          <Nav.Item as="li">
+            <Nav.Link href="http://localhost:3000/wishlist">Wishlist</Nav.Link>
+          </Nav.Item>
+          <Nav.Item as="li">
+            <Nav.Link href="http://localhost:3000/planes">Airplane Directory</Nav.Link>
+          </Nav.Item>
+          <Nav.Item as="li">
+            <Nav.Link href="http://localhost:3000/fields">Airfield Directory</Nav.Link>
+          </Nav.Item>
+          <Nav.Item as="li">
+            <Nav.Link href="http://localhost:3000/createAccount">Create Account</Nav.Link>
+          </Nav.Item>
+          <Nav.Item as="li">
+            <Nav.Link href="http://localhost:3000/login">Login</Nav.Link>
+          </Nav.Item>
+          <Nav.Item as="li">
+            <Logout />
+          </Nav.Item>
+        </Nav>
+      </Navbar>
       <Header />
-    </div>
+    </>
   );
 }
 
