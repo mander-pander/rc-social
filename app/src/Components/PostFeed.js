@@ -6,6 +6,7 @@ import styles from '../Components/CSS/PostFeed.module.css';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
+
 import { TiTrash } from "react-icons/ti";
 
 export default function PostFeed() {
@@ -68,15 +69,17 @@ export default function PostFeed() {
                 <AddPost />
                 {list.map((post) => {
                     return (
-                        <Card>
+                        <Card className={styles.card}>
                             <Card.Body>
                                 <div className={styles.posts}>
                                     <p className={styles.content}>{post.pc}</p>
-                                    <Button variant="outline-danger" size="sm" onClick={() => {
-                                        deletePost(post.pi)
-                                    }}> Delete Post
-                                    </Button>
-                                    <AddComment />
+                                    <div className={styles.buttons}>
+                                        <Button variant="outline-danger" size="sm" onClick={() => {
+                                            deletePost(post.pi)
+                                        }}> Delete Post
+                                        </Button>
+                                        <AddComment className={styles.commentBtn}/>
+                                    </div>
                                 </div>
 
                                 {post.cc.map((comment) => {
