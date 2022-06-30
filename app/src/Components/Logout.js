@@ -1,4 +1,5 @@
 import Cookies from 'js-cookie'
+import Nav from 'react-bootstrap/Nav'
 
 export default function Logout () {
     function onLogout() {
@@ -7,6 +8,6 @@ export default function Logout () {
     }
 
     return (
-        <button onClick={() => onLogout()}>Logout</button>
+        <Nav.Link onClick={() => onLogout()}>Logout</Nav.Link>
     );
   };

@@ -1,0 +1,33 @@
+.page {
+    background-image: url('Screen Shot 2022-06-30 at 3.24.58 PM.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    justify-content: center;
+    height: 100vh;
+    /* margin-left: 10%;
+    margin-right: 10%; */
+}
+
+.card {
+    width: 25vw;
+    margin: auto;
+    text-align: center;
+
+}
+
+form {
+    display: flex;
+    flex-flow: column wrap;
+    justify-items: center;
+    padding: 10px;
+    font-family: 'Tillana', cursive;
+}
+
+button {
+    background-color:#d8ceb3;
+
+}
