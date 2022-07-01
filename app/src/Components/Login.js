@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useState } from 'react';
 import Card from 'react-bootstrap/Card';
+
 import styles from './CSS/Auth.module.css';
 
 export default function Login() {
@@ -27,7 +28,7 @@ export default function Login() {
 
     return (
         <div className={styles.page}>
-            <Card className={styles.card}>
+            <Card className={styles.container} style={{border: '2px solid black'}}>
                 <form onSubmit={handleSubmit}>
                     Username:
                     <input
