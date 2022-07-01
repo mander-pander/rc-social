@@ -1,14 +1,16 @@
 import { useState } from 'react';
 import axios from 'axios';
-import Button from 'react-bootstrap/Button'
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 
-export default function AddComment() {
+export default function AddComment(props) {
     const [comment, setComment] = useState('');
     const [showForm, setShowForm] = useState(false);
 
-    function handleAddComment(content) {
+    function handleAddComment() {
         axios.post('http://localhost:5050/createComment', {
             content: comment,
+            post_id: props.post_id
         },
         {
             withCredentials: true,
@@ -22,17 +24,17 @@ export default function AddComment() {
     }
 
     return (
-        <div>
-            <Button variant="outline-dark" onClick={() => setShowForm(true)}>Add Comment</Button>
+        <>
+            <Button variant="outline-dark" size="sm" onClick={() => setShowForm(true)}>Add Comment</Button>
             <form style={{display: showForm ? "block" : "none"}} onSubmit={handleAddComment}>
                 <input
-                    placeholder='Talk to everyone about your flight!'
+                    placeholder='Leave a comment!'
                     value={comment}
                     onChange={(e) => setComment(e.target.value)}
                 />
                 <button>Submit</button>
             </form>
-        </div>
+        </>
     )
 
 }

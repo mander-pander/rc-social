@@ -65,18 +65,13 @@ module.exports = {
     },
 
     createComment: (req, res) => {
-        const { content } = req.body;
+        const { content, post_id } = req.body;
         sequelize.query(`
-            SELECT id
-            FROM posts
-            WHERE posts.user_id = '${req.user_id}'
+            INSERT INTO comments
+            (content, user_id, post_id)
+            VALUES ('${content}', '${req.user_id}', '${post_id}');
         `)
             .then((dbRes) => {
-                sequelize.query(`
-                INSERT INTO comments
-                (content, user_id, post_id)
-                VALUES ('${content}', '${req.user_id}', '${dbRes[0][0].id}');
-                `);
                 res.send(dbRes);
             })
             .catch((err) => console.log(err));
