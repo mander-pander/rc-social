@@ -3,6 +3,8 @@ import axios from 'axios';
 import styles from './CSS/DisplayAP.module.css';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Tooltip from 'react-bootstrap/Tooltip';
 
 export default function DisplayAP() {
     const [list, setList] = useState([]);
@@ -34,11 +36,16 @@ export default function DisplayAP() {
             {list.map((plane) => {
                 return (
                     <div className={styles.planes}>
-                        <Card className={styles.item} style={{ width: '10rem' }} >
+                        <Card className={styles.item} style={{ width: '12rem' }} >
                             <Card.Img varient="top" src={`https://images.unsplash.com/photo-1575116464504-9e7652fddcb3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80`} />
                             <Card.Title>{plane.model}</Card.Title>
 
-                            <Button variant="light" size="sm" onClick={() => handleWL(plane.id)}>Add to wishlist</Button>
+                            <OverlayTrigger
+                            placement="bottom"
+                            overlay={<Tooltip id="button-tooltip-2">Add this plane to your wishlist!</Tooltip>}>
+
+                            <Button variant="light" size="sm" onClick={() => handleWL(plane.id)}> + </Button>
+                            </OverlayTrigger>
                         </Card>
                     </div>
                 )
