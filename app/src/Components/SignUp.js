@@ -27,9 +27,8 @@ export default function SignUp() {
 
     return (
         <div className={styles.page}>
-            <Card className={styles.card} style={{ width: '18rem' }}>
-                <Card.Img variant="top" src={require('./CSS/Durafly_Gloster-Gladiator-Mk1_9499000364-0.png')} />
-                <form onSubmit={handleSubmit}>
+            <Card className={styles.container} style={{border: '2px solid black'}}>
+                <form className={styles.form} onSubmit={handleSubmit}>
                     Username:
                     <input
                         placeholder="username"
@@ -43,7 +42,10 @@ export default function SignUp() {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     />
-                    <button>Submit</button>
+                    <br></br>
+                    <button className={styles.authbutton}>Submit</button>
+                    <a href='http://localhost:3000/login'>Login</a>
+
                 </form>
             </Card>
         </div>

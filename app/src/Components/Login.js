@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { useState } from 'react';
 import Card from 'react-bootstrap/Card';
-
 import styles from './CSS/Auth.module.css';
 
 export default function Login() {
@@ -29,7 +28,7 @@ export default function Login() {
     return (
         <div className={styles.page}>
             <Card className={styles.container} style={{border: '2px solid black'}}>
-                <form onSubmit={handleSubmit}>
+                <form className={styles.form} onSubmit={handleSubmit}>
                     Username:
                     <input
                         placeholder="username"
@@ -44,10 +43,10 @@ export default function Login() {
                         onChange={(e) => setPassword(e.target.value)}
                     />
                     <br></br>
-                    <button>Submit</button>
-
+                    <button className={styles.authbutton}>Submit</button>
+                    <a href='http://localhost:3000/createAccount'>Create Account</a>
                 </form>
-                <a href='http://localhost:3000/createAccount'>Create Account</a>
+
             </Card>
         </div>
     )

@@ -19,16 +19,17 @@
     box-shadow: 10px 10px 10px 10px;
 }
 
-form {
+.form {
     display: flex;
     flex-flow: column wrap;
     justify-items: center;
     padding: 10px;
-    font-family: 'Tillana', cursive;
+    font-family: 'Klee One', cursive;
     font-weight: bold;
+    background-color:#d8ceb3;
 }
 
-button {
-    background-color:#d8ceb3;
+.authbutton {
+    background-color:white;
     font-weight: bold;
 }
