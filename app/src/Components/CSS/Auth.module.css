@@ -11,7 +11,7 @@
 }
 
 .container {
-    width: 25vw;
+    width: 30vw;
     margin: auto;
     text-align: center;
     background-clip: border-box;
@@ -22,14 +22,40 @@
 .form {
     display: flex;
     flex-flow: column wrap;
-    justify-items: center;
     padding: 10px;
-    font-family: 'Klee One', cursive;
-    font-weight: bold;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 200;
     background-color:#d8ceb3;
 }
 
 .authbutton {
     background-color:white;
-    font-weight: bold;
+    font-weight: 400;
+    width: fit-content;
+    align-self: center;
 }
+
+h1 {
+    font-family: 'Oswald', sans-serif;
+    text-shadow: 2px 3px #d8ceb3, 3px 4px #c6a39a;
+    letter-spacing: 0.1em;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+h1:before, h1:after {
+    content: " ";
+    position: absolute;
+    width: 20px;
+    height: 10px;
+    border-top: 2px solid #121212;
+    border-bottom: 2px solid #121212;
+}
+
+h1:before {
+    margin: 15px 0 0 -30px;
+  }
+
+  h1:after {
+    margin: 15px 0 0 10px;
+  }

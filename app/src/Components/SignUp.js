@@ -27,8 +27,9 @@ export default function SignUp() {
 
     return (
         <div className={styles.page}>
-            <Card className={styles.container} style={{border: '2px solid black'}}>
+            <Card className={styles.container} style={{ border: '2px solid black' }}>
                 <form className={styles.form} onSubmit={handleSubmit}>
+                    <h1>RC SOCIAL</h1>
                     Username:
                     <input
                         placeholder="username"
