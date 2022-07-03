@@ -28,8 +28,8 @@ export default function AddPost () {
                 value={post}
                 onChange={(e) => setPost(e.target.value)}
             />
-            <br/>
-            <button>Submit</button>
+            <br></br>
+            <button className={styles.addButton}>Add Post</button>
         </form>
     )
 }

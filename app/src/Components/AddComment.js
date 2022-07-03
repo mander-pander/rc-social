@@ -2,21 +2,27 @@ import { useState } from 'react';
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import Form from 'react-bootstrap/Form';
+import styles from './CSS/PostFeed.module.css'
 
 export default function AddComment(props) {
     const [comment, setComment] = useState('');
     const [showForm, setShowForm] = useState(false);
+
+    const handleClose = () => setShowForm(false);
+    const handleShow = () => setShowForm(true);
 
     function handleAddComment() {
         axios.post('http://localhost:5050/createComment', {
             content: comment,
             post_id: props.post_id
         },
-        {
-            withCredentials: true,
-            headers: {
-                'Access-Control-Allow-Origin': 'http://localhost:3000',
-            }})
+            {
+                withCredentials: true,
+                headers: {
+                    'Access-Control-Allow-Origin': 'http://localhost:3000',
+                }
+            })
             .then(() => {
                 console.log('comment added!')
             })
@@ -25,15 +31,21 @@ export default function AddComment(props) {
 
     return (
         <>
-            <Button variant="outline-dark" size="sm" onClick={() => setShowForm(true)}>Add Comment</Button>
-            <form style={{display: showForm ? "block" : "none"}} onSubmit={handleAddComment}>
-                <input
-                    placeholder='Leave a comment!'
-                    value={comment}
-                    onChange={(e) => setComment(e.target.value)}
-                />
-                <button>Submit</button>
-            </form>
+            <Button className={styles.commentBtn} variant="outline-dark" size="sm" onClick={handleShow}>+</Button>
+            <Modal show={showForm} onHide={handleClose} animation={false} size='lg' aria-labelledby="contained-modal-title-vcenter"
+      centered>
+                <Modal.Header closeButton>Add a comment</Modal.Header>
+                <Modal.Body>
+                    <Form style={{ display: showForm ? "block" : "none" }} onSubmit={handleAddComment}>
+                        <Form.Control as="textarea" rows={3}
+                            placeholder='Leave a comment!'
+                            value={comment}
+                            onChange={(e) => setComment(e.target.value)}
+                        />
+                        <button >Submit</button>
+                    </Form>
+                </Modal.Body>
+            </Modal>
         </>
     )
 

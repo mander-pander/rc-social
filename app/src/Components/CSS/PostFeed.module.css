@@ -1,10 +1,16 @@
 .feed {
-    margin-left: 10%;
-    margin-right: 10%;
     display: flex;
     flex-direction: column;
-    background-color: white;
+    background-color: rgb(252, 250, 238);
+    border: 3px solid #d8ceb3;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 200;
+    border-radius: 10px;
+    padding: 1%;
+}
 
+.cards {
+    margin-bottom: 2%;
 }
 
 .addpost {
@@ -24,24 +30,29 @@
 .posts {
     display: grid;
     grid-template-areas:
-    "postContent postContent"
-    "oneButton twoButton"
-    "commentContent commentContent"
-    "whiteSpace deleteButton";
-    grid-template-columns: 45% 45%;
-    column-gap: 10%;
+    "postContent deletePost"
+    "nothing addPost"
+    "commentContent deleteComment";
+    grid-template-columns: 95% 5%;
+    margin-bottom: 2%;
 }
 
 .content {
     grid-area: postContent;
 }
 
-.buttons {
-    grid-area: twoButton;
-    display: flex;
-    flex-direction: row;
-    justify-content: right;
-    margin-bottom: 10%;
+.deleteBtn {
+    grid-area: deletePost;
+}
+
+.commentBtn {
+    grid-area: addPost;
+}
+
+.addButton {
+    background-color: #d8ceb3;
+    border-color: black;
+    box-shadow: 1px 1px 1px 1px;
 }
 
 .comments {
@@ -50,13 +61,10 @@
     justify-content: space-between;
 }
 
-.card {
-    margin-bottom: 2%;
-}
-
 .page {
-
+    background-image: url('model-airplane-news-magazine-cover_u-L-Q1HRILU0.jpg');
     background-repeat: no-repeat;
-    background-size:contain;
+    background-size:cover;
     background-attachment: fixed;
+    padding: 10%;
 }
