@@ -1,3 +1,19 @@
+.page {
+    margin: 5%;
+}
+
+table {
+    border: 5px solid;
+    font-family: 'Oswald', sans-serif;
+}
+
+
+th {
+    color: #6c757d;
+}
+
 .name {
     font-weight: bold;
 }
+
+
