@@ -37,7 +37,8 @@ const {
     deletePost,
     deleteComments,
     displayWishlist,
-    addToWL
+    addToWL,
+    deleteItem
 } = require("./controller");
 
 const {
@@ -53,15 +54,14 @@ app.post("/createComment", [verifyToken], createComment);
 app.post("/addItem", [verifyToken], addToWL);
 app.delete("/posts", deletePost);
 app.delete("/comments", deleteComments);
+app.delete("/wishlist", deleteItem);
 
 const {
     createUser,
     loginUser
-    // logoutUser
 } = require("./controllerAuth");
 
 app.post("/signup", createUser);
 app.post("/login", loginUser);
-// app.post("/logout", logoutUser);
 
 app.listen(SERVER_PORT, () => console.log(`Server running on ${SERVER_PORT}`));

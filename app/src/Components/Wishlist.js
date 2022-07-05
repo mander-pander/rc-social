@@ -11,33 +11,59 @@ export default function Wishlist() {
 
     useEffect(() => {
         axios.get(`http://localhost:5050/wishlist/`,
-        {
-            withCredentials: true,
-            headers: {
-                'Access-Control-Allow-Origin': 'http://localhost:3000',
-            },
-        })
-        .then((res) => {
-            setList(res.data[0]);
-        })
-        .catch(err => console.log(err));
+            {
+                withCredentials: true,
+                headers: {
+                    'Access-Control-Allow-Origin': 'http://localhost:3000',
+                },
+            })
+            .then((res) => {
+                setList(res.data[0]);
+            })
+            .catch(err => console.log(err));
     }, []);
 
-    return (
-        <div>
+    const deleteItem = async (airplane_id) => {
+        let params = {
+            data: {
+                airplane_id
+            }
+        }
 
+        try {
+            try {
+                await axios.delete('http://localhost:5050/wishlist', { params });
+            } finally {
+                let res = await axios.get('http://localhost:5050/wishlist',
+                    {
+                        withCredentials: true,
+                        headers: {
+                            'Access-Control-Allow-Origin': 'http://localhost:3000',
+                        },
+                    })
+                setList(res.data[0]);
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+
+    return (
+        <div className={styles.page}>
             {list.map((plane) => {
+                console.log('cowman',plane);
                 return (
-                    <div className={styles.planes}>
+                    <div key={plane.id} className={styles.planes}>
                         <Card className={styles.item} style={{ width: '12rem' }} >
-                            <Card.Img varient="top" src={`https://images.unsplash.com/photo-1575116464504-9e7652fddcb3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80`} />
+                            <Card.Img varient="top" src={plane.img} />
                             <Card.Title>{plane.model}</Card.Title>
 
                             <OverlayTrigger
                                 placement="bottom"
                                 overlay={<Tooltip id="button-tooltip-2">Remove from wishlist.</Tooltip>}>
 
-                                <Button variant="light" size="sm" onClick={() => console.log('remove')}> Remove </Button>
+                                <Button variant="light" size="sm" onClick={() => {deleteItem(plane.id)}}> Remove </Button>
                             </OverlayTrigger>
                         </Card>
                     </div>

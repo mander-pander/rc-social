@@ -19,20 +19,27 @@ const sequelize = new Sequelize(CONNECTION_STRING, {
 module.exports = {
     displayFeed: (req, res) => {
         sequelize.query(`
-            SELECT posts.content AS pc, comments.content AS cc, posts.id AS pi, comments.id AS ci
+            SELECT posts.content AS pc, comments.content AS cc, posts.id AS pi, comments.id AS ci, username
             FROM posts
             LEFT JOIN comments
             ON posts.id = comments.post_id
+            LEFT JOIN users
+            ON posts.user_id = users.id
             `)
             .then((dbRes) => {
                 const newdbRes = {};
                 for (const dbResObj of dbRes[0]) {
                     if (!newdbRes[dbResObj.pi]) {
                         newdbRes[dbResObj.pi] = dbResObj;
-                        newdbRes[dbResObj.pi].cc = [newdbRes[dbResObj.pi].cc];
+                        newdbRes[dbResObj.pi].cc = [
+                            {
+                                cc: newdbRes[dbResObj.pi].cc,
+                                ci: newdbRes[dbResObj.pi].ci
+                            }
+                        ];
                     }
                     else {
-                        (newdbRes[dbResObj.pi].cc).push(dbResObj.cc);
+                        (newdbRes[dbResObj.pi].cc).push({ cc: dbResObj.cc, ci: dbResObj.ci });
                     }
                 }
                 res.send(Object.values(newdbRes).sort((a, b) => b.pi - a.pi));
@@ -108,6 +115,7 @@ module.exports = {
         sequelize.query(`
             SELECT *
             FROM airfield
+            ORDER BY name;
         `)
             .then((dbRes) => {
                 res.send(dbRes);
@@ -117,11 +125,11 @@ module.exports = {
 
     displayWishlist: (req, res) => {
         sequelize.query(`
-            SELECT airplane.model
+            SELECT airplane.model, airplane.img, airplane.id
             FROM wishlist
             INNER JOIN wishlistitem ON wishlist.id=wishlistitem.wishlist_id
             INNER JOIN airplane ON wishlistitem.airplane_id=airplane.id
-            WHERE wishlist.user_id='${req.user_id}'
+            WHERE wishlist.user_id='${req.user_id}';
         `)
             .then((dbRes) => {
                 res.send(dbRes);
@@ -145,6 +153,19 @@ module.exports = {
                 `);
                 res.send(dbRes);
                 // console.log('cowman', dbRes[0][0].id);
+            })
+            .catch((err) => console.log(err));
+    },
+
+    deleteItem: (req, res) => {
+        const { airplane_id } = JSON.parse(req.query.data);
+        sequelize.query(`
+            DELETE
+            FROM wishlistitem
+            WHERE airplane_id = '${airplane_id}';
+        `)
+            .then((dbRes) => {
+                res.send(dbRes);
             })
             .catch((err) => console.log(err));
     }

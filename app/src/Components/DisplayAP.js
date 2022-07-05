@@ -37,9 +37,8 @@ export default function DisplayAP() {
                 return (
                     <div className={styles.planes}>
                         <Card className={styles.item} style={{ width: '12rem' }} >
-                            <Card.Img varient="top" src={`https://images.unsplash.com/photo-1575116464504-9e7652fddcb3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80`} />
+                            <Card.Img varient="top" src={plane.img}/>
                             <Card.Title>{plane.model}</Card.Title>
-
                             <OverlayTrigger
                             placement="bottom"
                             overlay={<Tooltip id="button-tooltip-2">Add this plane to your wishlist!</Tooltip>}>
