@@ -26,9 +26,10 @@ export default function PostFeed() {
                 },
             })
             .then((res) => {
-
-                setList(res.data);
-
+                setTimeout(() => {
+                    setList(res.data);
+                    setIsLoading(false);
+                }, 3000)
             })
             .catch(err => console.log(err))
     }, []);
@@ -56,24 +57,34 @@ export default function PostFeed() {
         }
     };
 
-    const deleteComment = async (comment_id, res) => {
+    const deleteComment = async (comment_id) => {
         let params = {
             data: {
                 comment_id
             }
         }
         try {
-            await axios.delete('http://localhost:5050/comments', { params });
-
-
+            try {
+                await axios.delete('http://localhost:5050/comments', { params });
+            } finally {
+                let res = await axios.get(`http://localhost:5050/posts`, {
+                    withCredentials: true,
+                    headers: {
+                        'Access-Control-Allow-Origin': 'http://localhost:3000',
+                    },
+                })
+                setList(res.data);
+            }
         } catch (error) {
-            console.log(error)
+            console.log(error);
         }
     };
+    if (isLoading) {
+        return <LoadingSpinner />
+    }
 
     return (
         <div className={styles.page}>
-            <LoadingSpinner />
             <div className={styles.feed}>
                 <AddPost />
                 {list.map((post) => {
@@ -84,14 +95,14 @@ export default function PostFeed() {
                                     <p className={styles.content}>{post.pc}</p>
                                     <Card.Subtitle className="mb-2 text-muted" >{post.username}</Card.Subtitle>
                                     <Dropdown className={styles.deleteBtn} >
-                                        <Dropdown.Toggle style={{'background-color': 'white', 'border': 'none', 'color': 'black'}}>
+                                        <Dropdown.Toggle style={{ 'background-color': 'white', 'border': 'none', 'color': 'black' }}>
                                             ...
                                         </Dropdown.Toggle>
                                         <Dropdown.Menu>
-                                        <Dropdown.Item  onClick={() => {
-                                            deletePost(post.pi)
-                                        }}> Delete Post
-                                        </Dropdown.Item>
+                                            <Dropdown.Item onClick={() => {
+                                                deletePost(post.pi)
+                                            }}> Delete Post
+                                            </Dropdown.Item>
                                         </Dropdown.Menu>
                                     </Dropdown>
                                     <AddComment post_id={post.pi} />
@@ -99,9 +110,9 @@ export default function PostFeed() {
                                 </div>
 
                                 {post.cc.map((comment) => {
-                                    if (comment) {
+                                    if (comment.cc) {
                                         return (
-                                            <ListGroup >
+                                            <ListGroup key={post.ci}>
                                                 <ListGroup.Item className={styles.listItem} style={
                                                     {
                                                         'border-radius': '0',
@@ -110,10 +121,10 @@ export default function PostFeed() {
                                                     }
                                                 }>
                                                     <div className={styles.comments}>
-                                                        <p>{comment}</p>
-                                                        <Button variant="outline-dark" size="sm" onClick={() => {
-                                                            deleteComment(post.ci)
-                                                        }}><TiTrash />
+                                                        <p>{comment.cc}</p>
+                                                        <Button variant=""  onClick={() => {
+                                                            deleteComment(comment.ci)
+                                                        }}><TiTrash style={{fill: 'red'}} />
                                                         </Button>
                                                     </div>
 

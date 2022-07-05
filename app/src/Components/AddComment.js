@@ -33,16 +33,16 @@ export default function AddComment(props) {
         <>
             <Button className={styles.commentBtn} variant="outline-dark" size="sm" onClick={handleShow}>+</Button>
             <Modal show={showForm} onHide={handleClose} animation={false} size='lg' aria-labelledby="contained-modal-title-vcenter"
-      centered>
+      centered className={styles.commentForm} style={{display: 'flex'}}>
                 <Modal.Header closeButton>Add a comment</Modal.Header>
                 <Modal.Body>
-                    <Form style={{ display: showForm ? "block" : "none" }} onSubmit={handleAddComment}>
+                    <Form style={{ display: showForm ? "block" : "none"}} onSubmit={handleAddComment}>
                         <Form.Control as="textarea" rows={3}
                             placeholder='Leave a comment!'
                             value={comment}
                             onChange={(e) => setComment(e.target.value)}
                         />
-                        <button >Submit</button>
+                        <button className={styles.addComment}>Submit</button>
                     </Form>
                 </Modal.Body>
             </Modal>

@@ -49,6 +49,19 @@
     grid-area: addPost;
 }
 
+.addComment {
+    background-color: #d8ceb3;
+    border-color: black;
+    box-shadow: 1px 1px 1px 1px;
+    margin-top: 2%;
+}
+
+.commentForm {
+    display: flex;
+    font-family: 'Oswald', sans-serif;
+    text-align: right;
+}
+
 .addButton {
     background-color: #d8ceb3;
     border-color: black;
@@ -62,7 +75,7 @@
 }
 
 .page {
-    background-image: url('model-airplane-news-magazine-cover_u-L-Q1HRILU0.jpg');
+    background-image: url('./model-airplane-news-magazine-cover_u-L-Q1HRILU0_ml_resize_x2_toned.jpg');
     background-repeat: no-repeat;
     background-size:cover;
     background-attachment: fixed;
