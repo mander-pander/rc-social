@@ -1,10 +1,10 @@
-import Cookies from 'js-cookie'
-import Nav from 'react-bootstrap/Nav'
+import Cookies from 'js-cookie';
+import Nav from 'react-bootstrap/Nav';
 
 export default function Logout () {
     function onLogout() {
         Cookies.remove('x-access-token');
-        document.location.reload();
+        window.location = 'http://localhost:3000/login';
     }
 
     return (

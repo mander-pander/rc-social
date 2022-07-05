@@ -45,6 +45,7 @@ const {
     verifyToken
 } = require("./auth");
 
+app.get("/loginstatus", [verifyToken], (req, res) => res.sendStatus(200));
 app.get("/posts", [verifyToken], displayFeed);
 app.get("/planes", displayAP);
 app.get("/fields", displayAirfields);
