@@ -22,11 +22,12 @@ export default function AddPost () {
 
     return (
         <form className={styles.addpost} onSubmit={handleAddPost}>
-            <input
+            <textarea
                 className={styles.addText}
                 placeholder='Talk to everyone about your flight!'
                 value={post}
                 onChange={(e) => setPost(e.target.value)}
+                rows="5"
             />
             <br></br>
             <button className={styles.addButton}>Add Post</button>

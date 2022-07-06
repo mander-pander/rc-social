@@ -1,12 +1,11 @@
 .nav {
-    margin-top: 0;
-    margin-left: 10%;
-    margin-right: 10%;
-    height: 10vh;
+    margin: 0;
+    height: 5vh;
+    width: 100%;
+    background-color: #d8ceb3;
+    justify-content: space-evenly;
+    align-items: center;
     display: flex;
-    justify-content:space-between;
+    flex-direction: row;
     list-style: none;
-    padding-left: 0;
-    /* background-image: url('Components/CSS/photo-1513002749550-c59d786b8e6c.avif'); */
-    background-size: cover;
 }

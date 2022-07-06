@@ -1,11 +1,11 @@
 @keyframes left-to-right {
   0% {
-    transform:translateX(-100%);
+    transform:translateX(-25%);
   }
   100% {
-    transform:translateX(100%);
+    transform:translateX(50%);
   }
 }
   .loadingSpinner {
-    animation: left-to-right 4.5s infinite linear ;
+    animation: left-to-right 3.0s infinite linear ;
   }

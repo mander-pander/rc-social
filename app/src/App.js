@@ -29,6 +29,9 @@ function App() {
       <Navbar style={{ padding: 0 }}>
         <Nav as="ul" className={styles.nav}>
           <Nav.Item as="li">
+            <Nav.Link href="http://localhost:3000/posts" style={{fontFamily: 'Oswald', color: '#6c757d'}}>RC-Social</Nav.Link>
+          </Nav.Item>
+          <Nav.Item as="li">
             <Nav.Link href="http://localhost:3000/posts">Home Page</Nav.Link>
           </Nav.Item>
           <Nav.Item as="li">
