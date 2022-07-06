@@ -1,12 +1,15 @@
-.page {
-    margin: 5%;
+.container {
+    padding: 50px;
+    background-image: url('./10Model_Airplane_News_October_1934_ml_resize_x2_toned.jpg');
+    background-size:cover;
+    background-attachment: fixed;
 }
 
 table {
     border: 5px solid;
     font-family: 'Oswald', sans-serif;
+    background-color: white;
 }
-
 
 th {
     color: #6c757d;
@@ -15,5 +18,3 @@ th {
 .name {
     font-weight: bold;
 }
-
-

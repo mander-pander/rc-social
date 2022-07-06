@@ -32,8 +32,8 @@ export default function DisplayAF() {
     })
 
     return (
-        <div className={styles.page}>
-            <Table style={{ 'border-color': '#d8ceb3' }}>
+        <div className={styles.container}>
+            <Table style={{ borderColor: '#d8ceb3' }}>
                 <thead>
                     <tr>
                         <th>Field Name</th>
@@ -63,7 +63,7 @@ export default function DisplayAF() {
                 </thead>
                 {filteredList.map((field) => {
                     return (
-                        <tbody style={{ border: 'none' }}>
+                        <tbody key={field.id} style={{ border: 'none' }}>
                             <tr style={{ border: '1px solid black' }}>
                                 <td className={styles.name}>{field.name}</td>
                                 <td className={styles.address}>{field.address}</td>
