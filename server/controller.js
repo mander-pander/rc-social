@@ -25,7 +25,7 @@ module.exports = {
             ON posts.id = comments.post_id
             LEFT JOIN users
             ON posts.user_id = users.id
-            `)
+        `)
             .then((dbRes) => {
                 const newdbRes = {};
                 for (const dbResObj of dbRes[0]) {
@@ -85,7 +85,6 @@ module.exports = {
     },
 
     deletePost: (req, res) => {
-        // console.log("req.query", req.query);
         const { post_id } = JSON.parse(req.query.data);
         sequelize.query(`
             DELETE
@@ -139,7 +138,6 @@ module.exports = {
 
     addToWL: (req, res) => {
         const { airplane_id } = req.body;
-        console.log(req.body);
         sequelize.query(`
             SELECT id
             FROM wishlist
@@ -152,7 +150,6 @@ module.exports = {
                 VALUES ('${dbRes[0][0].id}', '${airplane_id}');
                 `);
                 res.send(dbRes);
-                // console.log('cowman', dbRes[0][0].id);
             })
             .catch((err) => console.log(err));
     },
