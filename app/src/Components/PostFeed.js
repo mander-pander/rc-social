@@ -16,11 +16,11 @@ export default function PostFeed() {
 
     useEffect(() => {
         setIsLoading(true);
-        axios.get(`http://localhost:5050/posts`,
+        axios.get(`https://rc-social.herokuapp.com/posts`,
             {
                 withCredentials: true,
                 headers: {
-                    'Access-Control-Allow-Origin': 'http://localhost:3000',
+                    'Access-Control-Allow-Origin': 'https://jolly-froyo-d03e7d.netlify.app',
                 },
             })
             .then((res) => {
@@ -41,12 +41,12 @@ export default function PostFeed() {
         }
         try {
             try {
-                await axios.delete('http://localhost:5050/posts', { params })
+                await axios.delete('https://rc-social.herokuapp.com/posts', { params })
             } finally {
-                let res = await axios.get(`http://localhost:5050/posts`, {
+                let res = await axios.get(`https://rc-social.herokuapp.com/posts`, {
                     withCredentials: true,
                     headers: {
-                        'Access-Control-Allow-Origin': 'http://localhost:3000',
+                        'Access-Control-Allow-Origin': 'https://jolly-froyo-d03e7d.netlify.app',
                     },
                 })
                 setTimeout(() => {
@@ -68,12 +68,12 @@ export default function PostFeed() {
         }
         try {
             try {
-                await axios.delete('http://localhost:5050/comments', { params });
+                await axios.delete('https://rc-social.herokuapp.com/comments', { params });
             } finally {
-                let res = await axios.get(`http://localhost:5050/posts`, {
+                let res = await axios.get(`https://rc-social.herokuapp.com/posts`, {
                     withCredentials: true,
                     headers: {
-                        'Access-Control-Allow-Origin': 'http://localhost:3000',
+                        'Access-Control-Allow-Origin': 'https://jolly-froyo-d03e7d.netlify.app',
                     },
                 })
                 setList(res.data);
@@ -125,9 +125,9 @@ export default function PostFeed() {
                                                 }>
                                                     <div className={styles.comments}>
                                                         <p>{comment.cc}</p>
-                                                        <Button variant=""  onClick={() => {
+                                                        <Button variant="" onClick={() => {
                                                             deleteComment(comment.ci)
-                                                        }}><TiTrash style={{fill: 'red'}} />
+                                                        }}><TiTrash style={{ fill: 'red' }} />
                                                         </Button>
                                                     </div>
 

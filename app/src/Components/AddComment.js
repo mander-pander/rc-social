@@ -13,14 +13,14 @@ export default function AddComment(props) {
     const handleShow = () => setShowForm(true);
 
     function handleAddComment() {
-        axios.post('http://localhost:5050/createComment', {
+        axios.post('https://rc-social.herokuapp.com/createComment', {
             content: comment,
             post_id: props.post_id
         },
             {
                 withCredentials: true,
                 headers: {
-                    'Access-Control-Allow-Origin': 'http://localhost:3000',
+                    'Access-Control-Allow-Origin': 'https://jolly-froyo-d03e7d.netlify.app',
                 }
             })
             .then(() => {
@@ -33,10 +33,10 @@ export default function AddComment(props) {
         <>
             <Button className={styles.commentBtn} variant="outline-dark" size="sm" onClick={handleShow}>+</Button>
             <Modal show={showForm} onHide={handleClose} animation={false} size='lg' aria-labelledby="contained-modal-title-vcenter"
-      centered className={styles.commentForm} style={{display: 'flex'}}>
+                centered className={styles.commentForm} style={{ display: 'flex' }}>
                 <Modal.Header closeButton>Add a comment</Modal.Header>
                 <Modal.Body>
-                    <Form style={{ display: showForm ? "block" : "none"}} onSubmit={handleAddComment}>
+                    <Form style={{ display: showForm ? "block" : "none" }} onSubmit={handleAddComment}>
                         <Form.Control as="textarea" rows={3}
                             placeholder='Leave a comment!'
                             value={comment}

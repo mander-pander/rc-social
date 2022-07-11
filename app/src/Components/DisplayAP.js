@@ -9,7 +9,7 @@ export default function DisplayAP() {
     const [list, setList] = useState([]);
 
     useEffect(() => {
-        axios.get(`http://localhost:5050/planes`)
+        axios.get(`https://rc-social.herokuapp.com/planes`)
             .then((res) => {
                 setList(res.data[0]);
 
@@ -18,13 +18,13 @@ export default function DisplayAP() {
     }, []);
 
     const handleWL = async (airplane_id) => {
-        axios.post('http://localhost:5050/addItem', {
+        axios.post('https://rc-social.herokuapp.com/addItem', {
             airplane_id
         },
             {
                 withCredentials: true,
                 headers: {
-                    'Access-Control-Allow-Origin': 'http://localhost:3000',
+                    'Access-Control-Allow-Origin': 'https://jolly-froyo-d03e7d.netlify.app',
                 }
             })
             .then(console.log('item added'))
@@ -32,22 +32,22 @@ export default function DisplayAP() {
     }
 
     return (
-            <div className={styles.page}>
-                {list.map((plane) => {
-                    return (
-                        <div className={styles.planes}>
-                            <OverlayTrigger
-                                placement="bottom"
-                                overlay={<Tooltip id="button-tooltip-2">Add this plane to your wishlist!</Tooltip>}>
-                                <Card className={styles.item} style={{ width: '12rem', borderColor: '#d8ceb3' }} onClick={() => handleWL(plane.id)}>
-                                    <Card.Img varient="top" src={plane.img} />
-                                    <Card.Title>{plane.model}</Card.Title>
-                                </Card>
-                            </OverlayTrigger>
+        <div className={styles.page}>
+            {list.map((plane) => {
+                return (
+                    <div className={styles.planes}>
+                        <OverlayTrigger
+                            placement="bottom"
+                            overlay={<Tooltip id="button-tooltip-2">Add this plane to your wishlist!</Tooltip>}>
+                            <Card className={styles.item} style={{ width: '12rem', borderColor: '#d8ceb3' }} onClick={() => handleWL(plane.id)}>
+                                <Card.Img varient="top" src={plane.img} />
+                                <Card.Title>{plane.model}</Card.Title>
+                            </Card>
+                        </OverlayTrigger>
 
-                        </div>
-                    )
-                })}
-            </div>
+                    </div>
+                )
+            })}
+        </div>
     )
 }

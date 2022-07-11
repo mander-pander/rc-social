@@ -9,10 +9,10 @@ import Cookies from 'js-cookie';
 
 function App() {
   useEffect(() => {
-    axios.get(`http://localhost:5050/loginstatus`, {
+    axios.get(`https://rc-social.herokuapp.com/loginstatus`, {
       withCredentials: true,
       headers: {
-        'Access-Control-Allow-Origin': 'http://localhost:3000',
+        'Access-Control-Allow-Origin': 'https://jolly-froyo-d03e7d.netlify.app',
       }
     })
 
@@ -29,22 +29,22 @@ function App() {
       <Navbar style={{ padding: 0 }}>
         <Nav as="ul" className={styles.nav}>
           <Nav.Item as="li">
-            <Nav.Link href="http://localhost:3000/posts" style={{fontFamily: 'Oswald', color: '#6c757d'}}>RC-Social</Nav.Link>
+            <Nav.Link href="/posts" style={{ fontFamily: 'Oswald', color: '#6c757d' }}>RC-Social</Nav.Link>
           </Nav.Item>
           <Nav.Item as="li">
-            <Nav.Link href="http://localhost:3000/posts">Home Page</Nav.Link>
+            <Nav.Link href="/posts">Home Page</Nav.Link>
           </Nav.Item>
           <Nav.Item as="li">
-            <Nav.Link href="http://localhost:3000/wishlist">Wishlist</Nav.Link>
+            <Nav.Link href="/wishlist">Wishlist</Nav.Link>
           </Nav.Item>
           <Nav.Item as="li">
-            <Nav.Link href="http://localhost:3000/planes">Airplane Directory</Nav.Link>
+            <Nav.Link href="/planes">Airplane Directory</Nav.Link>
           </Nav.Item>
           <Nav.Item as="li">
-            <Nav.Link href="http://localhost:3000/fields">Airfield Directory</Nav.Link>
+            <Nav.Link href="/fields">Airfield Directory</Nav.Link>
           </Nav.Item>
           <Nav.Item as="li">
-            {isLoggedIn ? <Logout /> : <Nav.Link href="http://localhost:3000/login">Login</Nav.Link>}
+            {isLoggedIn ? <Logout /> : <Nav.Link href="/login">Login</Nav.Link>}
           </Nav.Item>
         </Nav>
       </Navbar>

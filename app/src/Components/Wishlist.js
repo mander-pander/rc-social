@@ -10,11 +10,11 @@ export default function Wishlist() {
     const [list, setList] = useState([]);
 
     useEffect(() => {
-        axios.get(`http://localhost:5050/wishlist/`,
+        axios.get(`https://rc-social.herokuapp.com/wishlist/`,
             {
                 withCredentials: true,
                 headers: {
-                    'Access-Control-Allow-Origin': 'http://localhost:3000',
+                    'Access-Control-Allow-Origin': 'https://jolly-froyo-d03e7d.netlify.app',
                 },
             })
             .then((res) => {
@@ -32,13 +32,13 @@ export default function Wishlist() {
 
         try {
             try {
-                await axios.delete('http://localhost:5050/wishlist', { params });
+                await axios.delete('https://rc-social.herokuapp.com/wishlist', { params });
             } finally {
-                let res = await axios.get('http://localhost:5050/wishlist',
+                let res = await axios.get('https://rc-social.herokuapp.com/wishlist',
                     {
                         withCredentials: true,
                         headers: {
-                            'Access-Control-Allow-Origin': 'http://localhost:3000',
+                            'Access-Control-Allow-Origin': 'https://jolly-froyo-d03e7d.netlify.app',
                         },
                     })
                 setList(res.data[0]);
@@ -52,7 +52,7 @@ export default function Wishlist() {
     return (
         <div className={styles.page}>
             {list.map((plane) => {
-                console.log('cowman',plane);
+                console.log('cowman', plane);
                 return (
                     <div key={plane.id} className={styles.planes}>
                         <Card className={styles.item} style={{ width: '12rem' }} >
@@ -63,7 +63,7 @@ export default function Wishlist() {
                                 placement="bottom"
                                 overlay={<Tooltip id="button-tooltip-2">Remove from wishlist.</Tooltip>}>
 
-                                <Button variant="light" size="sm" onClick={() => {deleteItem(plane.id)}}> Remove </Button>
+                                <Button variant="light" size="sm" onClick={() => { deleteItem(plane.id) }}> Remove </Button>
                             </OverlayTrigger>
                         </Card>
                     </div>

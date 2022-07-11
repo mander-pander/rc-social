@@ -9,18 +9,18 @@ export default function Login() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post('http://localhost:5050/login', {
+        axios.post('https://rc-social.herokuapp.com/login', {
             username: username,
             password: password
         },
             {
                 withCredentials: true,
                 headers: {
-                    'Access-Control-Allow-Origin': 'http://localhost:3000',
+                    'Access-Control-Allow-Origin': 'https://jolly-froyo-d03e7d.netlify.app',
                 },
             })
             .then(() => {
-                window.location = `http://localhost:3000/posts`;
+                window.location = `https://rc-social.herokuapp.com/posts`;
             })
             .catch(err => { console.log(err) });
     }
@@ -28,7 +28,7 @@ export default function Login() {
     return (
         <div className={styles.page}>
 
-            <Card className={styles.container} style={{border: '2px solid black'}}>
+            <Card className={styles.container} style={{ border: '2px solid black' }}>
                 <form className={styles.form} onSubmit={handleSubmit}>
                     <h1>RC SOCIAL</h1>
                     Username:
@@ -46,7 +46,7 @@ export default function Login() {
                     />
                     <br></br>
                     <button className={styles.authbutton}>Submit</button>
-                    <a href='http://localhost:3000/createAccount'>Create Account</a>
+                    <a href='https://rc-social.herokuapp.com/createAccount'>Create Account</a>
                 </form>
 
             </Card>

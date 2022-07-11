@@ -10,14 +10,14 @@ export default function SignUp() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:5050/signup', {
+            await axios.post('https://rc-social.herokuapp.com/signup', {
                 username: username,
                 password: password
             },
                 {
                     withCredentials: true,
                     headers: {
-                        'Access-Control-Allow-Origin': 'http://localhost:3000',
+                        'Access-Control-Allow-Origin': 'https://jolly-froyo-d03e7d.netlify.app',
                     },
                 });
         } catch (error) {
@@ -45,7 +45,7 @@ export default function SignUp() {
                     />
                     <br></br>
                     <button className={styles.authbutton}>Submit</button>
-                    <a href='http://localhost:3000/login'>Login</a>
+                    <a href='https://rc-social.herokuapp.com/login'>Login</a>
 
                 </form>
             </Card>

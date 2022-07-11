@@ -2,22 +2,23 @@ import { useState } from 'react';
 import axios from 'axios';
 import styles from './CSS/PostFeed.module.css'
 
-export default function AddPost () {
+export default function AddPost() {
     const [post, setPost] = useState('');
 
     function handleAddPost(content) {
-        axios.post('http://localhost:5050/createPost', {
+        axios.post('https://rc-social.herokuapp.com/createPost', {
             content: post,
         },
-        {
-            withCredentials: true,
-            headers: {
-                'Access-Control-Allow-Origin': 'http://localhost:3000',
-            }})
-        .then(() => {
-            console.log('post added!')
-        })
-        .catch(err => console.log(err));
+            {
+                withCredentials: true,
+                headers: {
+                    'Access-Control-Allow-Origin': 'https://jolly-froyo-d03e7d.netlify.app',
+                }
+            })
+            .then(() => {
+                console.log('post added!')
+            })
+            .catch(err => console.log(err));
     }
 
     return (
