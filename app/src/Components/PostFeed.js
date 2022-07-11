@@ -9,6 +9,9 @@ import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { TiTrash } from "react-icons/ti";
+import { getDomainName } from '../utils/urls';
+
+const domainName = getDomainName();
 
 export default function PostFeed() {
     const [list, setList] = useState([]);
@@ -20,7 +23,7 @@ export default function PostFeed() {
             {
                 withCredentials: true,
                 headers: {
-                    'Access-Control-Allow-Origin': 'https://jolly-froyo-d03e7d.netlify.app',
+                    'Access-Control-Allow-Origin': domainName,
                 },
             })
             .then((res) => {
@@ -46,7 +49,7 @@ export default function PostFeed() {
                 let res = await axios.get(`https://rc-social.herokuapp.com/posts`, {
                     withCredentials: true,
                     headers: {
-                        'Access-Control-Allow-Origin': 'https://jolly-froyo-d03e7d.netlify.app',
+                        'Access-Control-Allow-Origin': domainName,
                     },
                 })
                 setTimeout(() => {
@@ -73,7 +76,7 @@ export default function PostFeed() {
                 let res = await axios.get(`https://rc-social.herokuapp.com/posts`, {
                     withCredentials: true,
                     headers: {
-                        'Access-Control-Allow-Origin': 'https://jolly-froyo-d03e7d.netlify.app',
+                        'Access-Control-Allow-Origin': domainName,
                     },
                 })
                 setList(res.data);

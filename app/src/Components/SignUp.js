@@ -2,6 +2,9 @@ import axios from 'axios';
 import { useState } from 'react';
 import Card from 'react-bootstrap/Card';
 import styles from './CSS/Auth.module.css';
+import { getDomainName } from '../utils/urls';
+
+const domainName = getDomainName();
 
 export default function SignUp() {
     const [username, setUsername] = useState('');
@@ -17,7 +20,7 @@ export default function SignUp() {
                 {
                     withCredentials: true,
                     headers: {
-                        'Access-Control-Allow-Origin': 'https://jolly-froyo-d03e7d.netlify.app',
+                        'Access-Control-Allow-Origin': domainName,
                     },
                 });
         } catch (error) {

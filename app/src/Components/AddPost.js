@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import axios from 'axios';
-import styles from './CSS/PostFeed.module.css'
+import styles from './CSS/PostFeed.module.css';
+import { getDomainName } from '../utils/urls';
+
+const domainName = getDomainName();
 
 export default function AddPost() {
     const [post, setPost] = useState('');
@@ -12,7 +15,7 @@ export default function AddPost() {
             {
                 withCredentials: true,
                 headers: {
-                    'Access-Control-Allow-Origin': 'https://jolly-froyo-d03e7d.netlify.app',
+                    'Access-Control-Allow-Origin': domainName,
                 }
             })
             .then(() => {

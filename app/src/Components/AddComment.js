@@ -4,6 +4,9 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import styles from './CSS/PostFeed.module.css'
+import { getDomainName } from '../utils/urls';
+
+const domainName = getDomainName();
 
 export default function AddComment(props) {
     const [comment, setComment] = useState('');
@@ -20,7 +23,7 @@ export default function AddComment(props) {
             {
                 withCredentials: true,
                 headers: {
-                    'Access-Control-Allow-Origin': 'https://jolly-froyo-d03e7d.netlify.app',
+                    'Access-Control-Allow-Origin': domainName,
                 }
             })
             .then(() => {

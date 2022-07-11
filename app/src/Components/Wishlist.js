@@ -5,6 +5,9 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 import Button from 'react-bootstrap/Button';
 import styles from './CSS/DisplayAP.module.css';
+import { getDomainName } from '../utils/urls';
+
+const domainName = getDomainName();
 
 export default function Wishlist() {
     const [list, setList] = useState([]);
@@ -14,7 +17,7 @@ export default function Wishlist() {
             {
                 withCredentials: true,
                 headers: {
-                    'Access-Control-Allow-Origin': 'https://jolly-froyo-d03e7d.netlify.app',
+                    'Access-Control-Allow-Origin': domainName,
                 },
             })
             .then((res) => {
@@ -38,7 +41,7 @@ export default function Wishlist() {
                     {
                         withCredentials: true,
                         headers: {
-                            'Access-Control-Allow-Origin': 'https://jolly-froyo-d03e7d.netlify.app',
+                            'Access-Control-Allow-Origin': domainName,
                         },
                     })
                 setList(res.data[0]);

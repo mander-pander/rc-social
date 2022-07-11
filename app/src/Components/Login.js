@@ -2,6 +2,9 @@ import axios from 'axios';
 import { useState } from 'react';
 import Card from 'react-bootstrap/Card';
 import styles from './CSS/Auth.module.css';
+import { getDomainName } from '../utils/urls';
+
+const domainName = getDomainName();
 
 export default function Login() {
     const [username, setUsername] = useState('');
@@ -16,11 +19,12 @@ export default function Login() {
             {
                 withCredentials: true,
                 headers: {
-                    'Access-Control-Allow-Origin': 'https://jolly-froyo-d03e7d.netlify.app',
+                    'Access-Control-Allow-Origin': domainName,
                 },
             })
             .then(() => {
-                window.location = `https://rc-social.herokuapp.com/posts`;
+                debugger;
+                window.location = domainName + '/posts';
             })
             .catch(err => { console.log(err) });
     }

@@ -6,13 +6,16 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Logout from "./Components/Logout";
 import Cookies from 'js-cookie';
+import { getDomainName } from './utils/urls';
+
+const domainName = getDomainName();
 
 function App() {
   useEffect(() => {
     axios.get(`https://rc-social.herokuapp.com/loginstatus`, {
       withCredentials: true,
       headers: {
-        'Access-Control-Allow-Origin': 'https://jolly-froyo-d03e7d.netlify.app',
+        'Access-Control-Allow-Origin': domainName,
       }
     })
 
