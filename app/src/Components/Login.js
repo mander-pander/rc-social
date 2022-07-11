@@ -23,7 +23,6 @@ export default function Login() {
                 },
             })
             .then(() => {
-                debugger;
                 window.location = domainName + '/posts';
             })
             .catch(err => { console.log(err) });
