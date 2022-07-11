@@ -10,7 +10,7 @@ const app = express();
 
 const corsConfig = {
     credentials: true,
-    origin: true
+    origin: ["https://jolly-froyo-d03e7d.netlify.app"]
 };
 app.use(cors(corsConfig));
 
