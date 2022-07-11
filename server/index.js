@@ -4,7 +4,7 @@ const cors = require("cors");
 
 require("dotenv").config();
 
-const { SERVER_PORT } = process.env;
+const { PORT } = process.env;
 
 const app = express();
 
@@ -65,4 +65,4 @@ const {
 app.post("/signup", createUser);
 app.post("/login", loginUser);
 
-app.listen(SERVER_PORT, () => console.log(`Server running on ${SERVER_PORT}`));
+app.listen(PORT, () => console.log(`Server running on ${PORT}`));

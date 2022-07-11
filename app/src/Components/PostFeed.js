@@ -10,11 +10,9 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { TiTrash } from "react-icons/ti";
 
-
 export default function PostFeed() {
     const [list, setList] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
-
 
     useEffect(() => {
         setIsLoading(true);
@@ -35,6 +33,7 @@ export default function PostFeed() {
     }, []);
 
     const deletePost = async (post_id) => {
+        setIsLoading(true);
         let params = {
             data: {
                 post_id
@@ -50,7 +49,11 @@ export default function PostFeed() {
                         'Access-Control-Allow-Origin': 'http://localhost:3000',
                     },
                 })
-                setList(res.data);
+                setTimeout(() => {
+                    setList(res.data);
+                    setIsLoading(false);
+                }, 1000)
+
             }
         } catch (error) {
             console.log(error)

@@ -4,11 +4,11 @@ const jwt = require("jsonwebtoken");
 
 require("dotenv").config();
 
-const { CONNECTION_STRING, JWT_SECRET } = process.env;
+const { DATABASE_URL, JWT_SECRET } = process.env;
 
 const Sequelize = require("sequelize");
 
-const sequelize = new Sequelize(CONNECTION_STRING, {
+const sequelize = new Sequelize(DATABASE_URL, {
     dialect: "postgres",
     dialectOptions: {
         ssl: {
