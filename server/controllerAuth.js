@@ -63,7 +63,7 @@ module.exports = {
                     });
                     console.log("successfully logged in");
 
-                    res.cookie("x-access-token", token, { sameSite: "none" });
+                    res.cookie("x-access-token", token, { sameSite: "none", secure: true });
                     res.status(200).send({ username, token });
                 }
             })
