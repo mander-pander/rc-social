@@ -19,9 +19,6 @@ app.use(express.json());
 
 app.use("/static", express.static(path.join(__dirname, "./build//static")));
 
-app.get("*", (req, res) => {
-    res.sendFile("index.html", { root: path.join(__dirname, "./build/") });
-});
 const cookieParser = require("cookie-parser");
 
 app.use(cookieParser());
@@ -70,5 +67,9 @@ const {
 
 app.post("/api/signup", createUser);
 app.post("/api/login", loginUser);
+
+app.get("*", (req, res) => {
+    res.sendFile("index.html", { root: path.join(__dirname, "./build/") });
+});
 
 app.listen(PORT, () => console.log(`Server running on ${PORT}`));
