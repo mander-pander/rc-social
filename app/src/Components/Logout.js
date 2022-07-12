@@ -4,7 +4,7 @@ import Nav from 'react-bootstrap/Nav';
 export default function Logout() {
     function onLogout() {
         Cookies.remove('x-access-token');
-        window.location = 'https://rc-social.herokuapp.com/login';
+        window.location = '/login';
     }
 
     return (

@@ -5,19 +5,19 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 import Button from 'react-bootstrap/Button';
 import styles from './CSS/DisplayAP.module.css';
-import { getDomainName } from '../utils/urls';
 
-const domainName = getDomainName();
+
+
 
 export default function Wishlist() {
     const [list, setList] = useState([]);
 
     useEffect(() => {
-        axios.get(`https://rc-social.herokuapp.com/wishlist/`,
+        axios.get(`https://rc-social.herokuapp.com/api/wishlist/`,
             {
                 withCredentials: true,
                 headers: {
-                    'Access-Control-Allow-Origin': domainName,
+                    'Access-Control-Allow-Origin': '*',
                 },
             })
             .then((res) => {
@@ -35,13 +35,13 @@ export default function Wishlist() {
 
         try {
             try {
-                await axios.delete('https://rc-social.herokuapp.com/wishlist', { params });
+                await axios.delete('https://rc-social.herokuapp.com/api/wishlist', { params });
             } finally {
-                let res = await axios.get('https://rc-social.herokuapp.com/wishlist',
+                let res = await axios.get('https://rc-social.herokuapp.com/api/wishlist',
                     {
                         withCredentials: true,
                         headers: {
-                            'Access-Control-Allow-Origin': domainName,
+                            'Access-Control-Allow-Origin': '*',
                         },
                     })
                 setList(res.data[0]);

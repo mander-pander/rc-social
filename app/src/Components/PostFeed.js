@@ -9,9 +9,9 @@ import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { TiTrash } from "react-icons/ti";
-import { getDomainName } from '../utils/urls';
 
-const domainName = getDomainName();
+
+
 
 export default function PostFeed() {
     const [list, setList] = useState([]);
@@ -19,11 +19,11 @@ export default function PostFeed() {
 
     useEffect(() => {
         setIsLoading(true);
-        axios.get(`https://rc-social.herokuapp.com/posts`,
+        axios.get(`https://rc-social.herokuapp.com/api/posts`,
             {
                 withCredentials: true,
                 headers: {
-                    'Access-Control-Allow-Origin': domainName,
+                    'Access-Control-Allow-Origin': '*',
                 },
             })
             .then((res) => {
@@ -44,12 +44,12 @@ export default function PostFeed() {
         }
         try {
             try {
-                await axios.delete('https://rc-social.herokuapp.com/posts', { params })
+                await axios.delete('https://rc-social.herokuapp.com/api/posts', { params })
             } finally {
-                let res = await axios.get(`https://rc-social.herokuapp.com/posts`, {
+                let res = await axios.get(`https://rc-social.herokuapp.com/api/posts`, {
                     withCredentials: true,
                     headers: {
-                        'Access-Control-Allow-Origin': domainName,
+                        'Access-Control-Allow-Origin': '*',
                     },
                 })
                 setTimeout(() => {
@@ -71,12 +71,12 @@ export default function PostFeed() {
         }
         try {
             try {
-                await axios.delete('https://rc-social.herokuapp.com/comments', { params });
+                await axios.delete('https://rc-social.herokuapp.com/api/comments', { params });
             } finally {
-                let res = await axios.get(`https://rc-social.herokuapp.com/posts`, {
+                let res = await axios.get(`https://rc-social.herokuapp.com/api/posts`, {
                     withCredentials: true,
                     headers: {
-                        'Access-Control-Allow-Origin': domainName,
+                        'Access-Control-Allow-Origin': '*',
                     },
                 })
                 setList(res.data);

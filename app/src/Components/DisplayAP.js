@@ -4,15 +4,15 @@ import styles from './CSS/DisplayAP.module.css';
 import Card from 'react-bootstrap/Card';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
-import { getDomainName } from '../utils/urls';
 
-const domainName = getDomainName();
+
+
 
 export default function DisplayAP() {
     const [list, setList] = useState([]);
 
     useEffect(() => {
-        axios.get(`https://rc-social.herokuapp.com/planes`)
+        axios.get(`https://rc-social.herokuapp.com/api/planes`)
             .then((res) => {
                 setList(res.data[0]);
 
@@ -21,13 +21,13 @@ export default function DisplayAP() {
     }, []);
 
     const handleWL = async (airplane_id) => {
-        axios.post('https://rc-social.herokuapp.com/addItem', {
+        axios.post('https://rc-social.herokuapp.com/api/addItem', {
             airplane_id
         },
             {
                 withCredentials: true,
                 headers: {
-                    'Access-Control-Allow-Origin': domainName,
+                    'Access-Control-Allow-Origin': '*',
                 }
             })
             .then(console.log('item added'))

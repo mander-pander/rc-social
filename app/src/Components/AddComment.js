@@ -4,9 +4,9 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import styles from './CSS/PostFeed.module.css'
-import { getDomainName } from '../utils/urls';
 
-const domainName = getDomainName();
+
+
 
 export default function AddComment(props) {
     const [comment, setComment] = useState('');
@@ -16,14 +16,14 @@ export default function AddComment(props) {
     const handleShow = () => setShowForm(true);
 
     function handleAddComment() {
-        axios.post('https://rc-social.herokuapp.com/createComment', {
+        axios.post('https://rc-social.herokuapp.com/api/createComment', {
             content: comment,
             post_id: props.post_id
         },
             {
                 withCredentials: true,
                 headers: {
-                    'Access-Control-Allow-Origin': domainName,
+                    'Access-Control-Allow-Origin': '*',
                 }
             })
             .then(() => {

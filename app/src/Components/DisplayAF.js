@@ -12,7 +12,7 @@ export default function DisplayAF() {
 
 
     useEffect(() => {
-        axios.get(`https://rc-social.herokuapp.com/fields`)
+        axios.get(`https://rc-social.herokuapp.com/api/fields`)
             .then((res) => {
                 setList(res.data[0]);
             })

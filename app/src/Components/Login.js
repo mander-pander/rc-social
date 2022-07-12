@@ -2,9 +2,9 @@ import axios from 'axios';
 import { useState } from 'react';
 import Card from 'react-bootstrap/Card';
 import styles from './CSS/Auth.module.css';
-import { getDomainName } from '../utils/urls';
 
-const domainName = getDomainName();
+
+
 
 export default function Login() {
     const [username, setUsername] = useState('');
@@ -12,18 +12,18 @@ export default function Login() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post('https://rc-social.herokuapp.com/login', {
+        axios.post('https://rc-social.herokuapp.com/api/login', {
             username: username,
             password: password
         },
             {
                 withCredentials: true,
                 headers: {
-                    'Access-Control-Allow-Origin': domainName,
+                    'Access-Control-Allow-Origin': '*',
                 },
             })
             .then(() => {
-                window.location = domainName + '/posts';
+                window.location = '/posts';
             })
             .catch(err => { console.log(err) });
     }
@@ -49,7 +49,7 @@ export default function Login() {
                     />
                     <br></br>
                     <button className={styles.authbutton}>Submit</button>
-                    <a href='https://rc-social.herokuapp.com/createAccount'>Create Account</a>
+                    <a href='https://rc-social.herokuapp.com/api/createAccount'>Create Account</a>
                 </form>
 
             </Card>

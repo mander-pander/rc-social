@@ -1,25 +1,23 @@
 import { useState } from 'react';
 import axios from 'axios';
 import styles from './CSS/PostFeed.module.css';
-import { getDomainName } from '../utils/urls';
-
-const domainName = getDomainName();
 
 export default function AddPost() {
     const [post, setPost] = useState('');
 
-    function handleAddPost(content) {
-        axios.post('https://rc-social.herokuapp.com/createPost', {
+    function handleAddPost(e) {
+        e.preventDefault();
+        axios.post('https://rc-social.herokuapp.com/api/createPost', {
             content: post,
         },
             {
                 withCredentials: true,
                 headers: {
-                    'Access-Control-Allow-Origin': domainName,
+                    'Access-Control-Allow-Origin': '*',
                 }
             })
             .then(() => {
-                console.log('post added!')
+                window.reload();
             })
             .catch(err => console.log(err));
     }
