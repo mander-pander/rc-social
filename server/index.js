@@ -11,7 +11,7 @@ const app = express();
 
 const corsConfig = {
     credentials: true,
-    origin: ["https://jolly-froyo-d03e7d.netlify.app"]
+    origin: ["http://rc-social.herokuapp.com"]
 };
 app.use(cors(corsConfig));
 
