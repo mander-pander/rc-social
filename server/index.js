@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 const express = require("express");
 const cors = require("cors");
+const path = require("path");
 
 require("dotenv").config();
 
@@ -15,6 +16,7 @@ const corsConfig = {
 app.use(cors(corsConfig));
 
 app.use(express.json());
+app.use(express.static(path.join(__dirname, "./build")));
 
 const cookieParser = require("cookie-parser");
 
