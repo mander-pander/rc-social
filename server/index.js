@@ -47,24 +47,24 @@ const {
     verifyToken
 } = require("./auth");
 
-app.get("/loginstatus", [verifyToken], (req, res) => res.sendStatus(200));
-app.get("/posts", [verifyToken], displayFeed);
-app.get("/planes", displayAP);
-app.get("/fields", displayAirfields);
-app.get("/wishlist", [verifyToken], displayWishlist);
-app.post("/createPost", [verifyToken], createPost);
-app.post("/createComment", [verifyToken], createComment);
-app.post("/addItem", [verifyToken], addToWL);
-app.delete("/posts", deletePost);
-app.delete("/comments", deleteComments);
-app.delete("/wishlist", deleteItem);
+app.get("/api/loginstatus", [verifyToken], (req, res) => res.sendStatus(200));
+app.get("/api/posts", [verifyToken], displayFeed);
+app.get("/api/planes", displayAP);
+app.get("/api/fields", displayAirfields);
+app.get("/api/wishlist", [verifyToken], displayWishlist);
+app.post("/api/createPost", [verifyToken], createPost);
+app.post("/api/createComment", [verifyToken], createComment);
+app.post("/api/addItem", [verifyToken], addToWL);
+app.delete("/api/posts", deletePost);
+app.delete("/api/comments", deleteComments);
+app.delete("/api/wishlist", deleteItem);
 
 const {
     createUser,
     loginUser
 } = require("./controllerAuth");
 
-app.post("/signup", createUser);
-app.post("/login", loginUser);
+app.post("/api/signup", createUser);
+app.post("/api/login", loginUser);
 
 app.listen(PORT, () => console.log(`Server running on ${PORT}`));
