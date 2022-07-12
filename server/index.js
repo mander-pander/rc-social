@@ -17,8 +17,10 @@ app.use(cors(corsConfig));
 
 app.use(express.json());
 
-app.get("*", (req, res) => {
-    res.sendFile("index.html", { root: path.join(__dirname, "./build") });
+app.use(express.static(path.join(__dirname, "build")));
+
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 
 const cookieParser = require("cookie-parser");
