@@ -16,7 +16,10 @@ const corsConfig = {
 app.use(cors(corsConfig));
 
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "./build")));
+
+app.get("*", (req, res) => {
+    res.sendFile("index.html", { root: path.join(__dirname, "./build") });
+});
 
 const cookieParser = require("cookie-parser");
 
