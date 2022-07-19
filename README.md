@@ -1,5 +1,7 @@
 # RC Social
 
+Live Site: https://rc-social.herokuapp.com/login
+
 #### Technologies Used
 React, Node.js, Express.js, Axios, PostgreSQL, Bootstrap, CSS Modules, bcrypt, JSON Web Token
 
