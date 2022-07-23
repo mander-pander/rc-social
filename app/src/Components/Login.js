@@ -3,18 +3,16 @@ import { useState } from 'react';
 import Card from 'react-bootstrap/Card';
 import styles from './CSS/Auth.module.css';
 
-
-
-
 export default function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
     const handleSubmit = (e) => {
+        const isDemo = e.target.dataset.demo;
         e.preventDefault();
         axios.post('https://rc-social.herokuapp.com/api/login', {
-            username: username,
-            password: password
+            username: isDemo ? 'demo' : username,
+            password: isDemo ? 'demo' : password
         },
             {
                 withCredentials: true,
@@ -27,6 +25,8 @@ export default function Login() {
             })
             .catch(err => { console.log(err) });
     }
+
+
 
     return (
         <div className={styles.page}>
@@ -49,7 +49,8 @@ export default function Login() {
                     />
                     <br></br>
                     <button className={styles.authbutton}>Submit</button>
-                    <a href='https://rc-social.herokuapp.com/api/createAccount'>Create Account</a>
+                    <button className={styles.authbutton} data-demo>Demo - No account needed</button>
+                    <a href='https://rc-social.herokuapp.com/createAccount'>Create Account</a>
                 </form>
 
             </Card>
